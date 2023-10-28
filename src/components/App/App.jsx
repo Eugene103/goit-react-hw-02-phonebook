@@ -1,0 +1,55 @@
+import { ContactForm } from "components/ContactForm/ContactForm";
+import { Component } from "react";
+import { nanoid } from "nanoid";
+import { ContactsList } from "components/ContactsList/ContactsList";
+import { Container, Section } from "./GlobalStyle";
+
+export class App extends Component {
+  state = {
+    contacts: [],
+    filter: '',
+  };
+
+  addContact = (newContact) => {
+    const {contacts} = this.state
+      const newNameToLower = newContact.Name.toLocaleLowerCase();
+      const checkName = contacts.some(contact => contact.Name.toLocaleLowerCase() === newNameToLower)
+    if (checkName) {
+      alert(`${newContact.Name} is already in contacts`)
+    } else {
+      
+    } return this.setState(prevState => ({
+      contacts: [...prevState.contacts, {...newContact, id: nanoid()}]
+    }))
+    }
+  changeFilter = (value) => {
+    this.setState({
+      filter: value
+    })
+  }
+  checkFilter = () => {
+    return this.state.contacts.filter(cont => {
+      const filterToLower = this.state.filter.toLocaleLowerCase();
+      const nameToLower = cont.Name.toLocaleLowerCase()
+      return nameToLower.includes(filterToLower)
+    })
+  }
+  delContact = (id) => {
+    return this.setState(
+      this.state.contacts.splice({ id }, 1)
+    )
+}
+  render() {
+    
+    const findFilter = this.checkFilter()
+    return <Section>
+      <h1>PhoneBook</h1>
+      <ContactForm onAdd={this.addContact} />
+      <Container>
+      <h2>Contacts</h2>
+        <ContactsList arr={findFilter} onFilter={this.changeFilter} onDell={this.delContact} />
+      </Container>
+    </Section>
+  }
+};
+
