@@ -4,13 +4,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 margin-top: 10px;
 `
-export const FindCont = styled.label`
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 5px;
-    width: fit-content;
-`
+
 export const List = styled.ul`
 display: flex;
 flex-direction: column;

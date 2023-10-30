@@ -3,6 +3,7 @@ import { Component } from "react";
 import { nanoid } from "nanoid";
 import { ContactsList } from "components/ContactsList/ContactsList";
 import { Container, Section } from "./GlobalStyle";
+import { FindCont } from "components/FindCont/FindCont";
 
 export class App extends Component {
   state = {
@@ -16,9 +17,9 @@ export class App extends Component {
       const checkName = contacts.some(contact => contact.Name.toLocaleLowerCase() === newNameToLower)
     if (checkName) {
       alert(`${newContact.Name} is already in contacts`)
-    } else {
-      
-    } return this.setState(prevState => ({
+      return
+    }
+    this.setState(prevState => ({
       contacts: [...prevState.contacts, {...newContact, id: nanoid()}]
     }))
     }
@@ -40,14 +41,14 @@ export class App extends Component {
     )
 }
   render() {
-    
     const findFilter = this.checkFilter()
     return <Section>
       <h1>PhoneBook</h1>
       <ContactForm onAdd={this.addContact} />
       <Container>
-      <h2>Contacts</h2>
-        <ContactsList arr={findFilter} onFilter={this.changeFilter} onDell={this.delContact} />
+        <h2>Contacts</h2>
+        <FindCont onFilter={this.changeFilter} filterValue={this.state.filter} />
+        <ContactsList arr={findFilter}  onDell={this.delContact} />
       </Container>
     </Section>
   }
