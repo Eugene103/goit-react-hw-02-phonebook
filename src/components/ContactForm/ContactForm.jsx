@@ -25,12 +25,12 @@ export const ContactForm = ({onAdd}) => {
       }}
     >
       <Conteiner>
-            <Label htmlFor="name">name
+            <Label htmlFor="name">Name
           <Field id="name" name="name" placeholder="Jane" />    
           <ErrorMessage name="name">{msg => <Err>{msg}</Err>}</ErrorMessage>
         </Label>
         
-        <Label htmlFor="number">number
+        <Label htmlFor="number">Number
           <Field id="number" name="number" placeholder="459-12-56" />
           <ErrorMessage name="number">{msg => <Err>{msg}</Err>}</ErrorMessage>
         </Label>
